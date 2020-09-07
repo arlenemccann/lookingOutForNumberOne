@@ -1,12 +1,14 @@
 public class lookingOutForNumberOne {
 
 
-    public static void countDigits(int count, int num){
+    public static void countDigits(int num){
 
-        int count = 0, num = 123423876;
+        int count = 0;
         for (; num != 0; num = num/10, ++count) {
         } //Goal: Count the number of digits in an integer
         //if the number doesn't equal zero, an
+        
+        return count;
 
 
     }
@@ -45,10 +47,9 @@ public class lookingOutForNumberOne {
 
 
     public static void main(String[] args) {
-
-        System.out.println(countDigits);
-
-        System.out.println(countDigits.nthDigit(12342356,5));
+        
+        int count= countDigits(12345678);
+        System.out.println(count);
 
     }
 
