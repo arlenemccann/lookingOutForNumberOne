@@ -17,7 +17,7 @@ public class lookingOutForNumberOne {
         if (n % 10 == digit){
             }
 
-        return n;
+        return digit;
     } //Goal: Find the location of a digit from the right to left
 
     public static int nthDigit(int n, int num) {
