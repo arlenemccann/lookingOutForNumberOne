@@ -12,19 +12,26 @@ public class lookingOutForNumberOne {
 
 
     }
+    public static char nthDigitBack(int a, int b){
 
-    public static int nthDigitBack(int n, int digit){
-        if (n % 10 == digit){
-            }
+        String z = a + "";
+        char z1[] = z.toCharArray();
+        int length = z1.length - 1;
+        char result = z1[length - b];
+        return result;
 
-        return digit;
-    } //Goal: Find the location of a digit from the right to left
+    }
+    //Goal: Find the nth Digit from right to left
 
-    public static int nthDigit(int n, int num) {
+    public static char nthDigit(int x, int y){
+        String digit = x + "";
+        return digit.charAt(y);
 
-        return 0;
+    }
 
-    }  //Goal: Find the location of a digit from left to right
+    //Goal: Find the nth Digit from left to right
+
+
 
     public static void updateTally(int n, int num, int[] tally){
 
@@ -36,11 +43,17 @@ public class lookingOutForNumberOne {
 
 
     public static void main(String[] args) {
+        try {
+
 
         int count = countDigits(12345678);
         System.out.println(count);
-        int position = nthDigitBack(12345678, 4);
-        System.out.println(position);
+        System.out.println(nthDigitBack(8675309, 4));
+        System.out.println(nthDigit(123453232, 6));
+    }
+        catch (Exception e){
+            System.out.println("Oops. Something went wrong.");
+        }
 
     }
 
