@@ -26,26 +26,35 @@ public class lookingOutForNumberOne {
 
     public static int countDigits(int num){
 
-        int count = 0;
-        for (; num != 0; num = num/10, ++count) {
-        }
+        //int count = 0;
+       // for (; num != 0; num = num/10, ++count) {
+        //}
 
-        return count;
+        return(int) Math.floor(Math.log10(num)+1);
     }//Part 1 - Goal: Count the number of digits in an integer
     public static char nthDigitBack(int n, int num){
 
         String z = num + "";
-        char z1[] = z.toCharArray();
+        char[] z1 = z.toCharArray();
         int length = z1.length - 1;
-        char result = z1[length - n];
-        return result;
+        return z1[length - n];
 
     }
     //Part 2 - Goal: Find the nth Digit from right to left
 
-    public static char nthDigit(int n, int num){
-        String digit = num + "";
-        return digit.charAt(n);
+    public static int nthDigit(int n, int num){
+        int digit2 = 0;
+        while (num != 0){
+            int digit = num % 10;
+            digit2 =digit2 * 10 + digit;
+            num /= 10;
+        }
+
+        //String digit = num + "";
+        //return digit.charAt(n);
+        //first idea ^^
+
+        return(int) (digit2 / Math.pow(10,n) % 10);
 
     }
     //Part 3 - Goal: Find the nth Digit from left to right
@@ -103,8 +112,11 @@ public class lookingOutForNumberOne {
             int[] nums = readMysteriousNumbers(readFile);
             int[] tally = nthDigitTally(b, nums);
             for(int i = 0; i < 10; i++){
-                System.out.println(i + "s:\t" + tally[i]);
-            }
+                System.out.println(i + "s: \t" + tally[i]);
+            } //Finish - Write your main method to read a number n, from input
+            //You can let a user enter a file name of a dataset or you can automatically use one.
+            //The program should tally the nth digits of the number in the data set
+            //and print out a table
 
         //int count = countDigits(12345678);
         //System.out.println(count);
