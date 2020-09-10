@@ -1,6 +1,25 @@
 import java.io.File;
-import java.sql.SQLOutput;
 import java.util.Scanner;
+
+/*
+Our world is controlled by mathematics – just ask any physicist.
+Sometimes math can be beautiful, such as when the golden ratio crops up in nature.
+This assignment asks what does the number of social media posts each day,
+the population of every town in the US, the address of every faculty member of Temple,
+and the size of tallest 100 buildings have in common?
+Please utilize the discussion board on Canvas for this assignment.
+Some parts are tricky, and I encourage you to ask your classmates for help.
+The final part of this project requires you to post your dataset on the message board.
+Assignment
+
+The end goal of this program is to write a program that determines the distribution
+of initial digits in a set of data. In the end, we want a program that reads in a number n
+and a list of numbers nums and outputs an nth of 10 values: the frequency with which
+each digit 0-9 appears as the nth digit of one of the input numbers.
+However, we’ll break that problem down into easier steps.
+
+*/
+
 
 public class lookingOutForNumberOne {
 
@@ -57,13 +76,13 @@ public class lookingOutForNumberOne {
     //and returns a tally of frequencies of 0-9 as the nth digit of all the numbers in nums
 
 
-    public static int[] readMysteriousNumbers(File filename){
+    public static int[] readMysteriousNumbers(File filename) throws Exception {
         File file = new File("livejournal.txt");
-        Scanner scanner = new Scanner(filename);
-        String[] fileInput = filename.list();
-        int[] nums = new int[fileInput.length];
-        for(int i = 0; i < fileInput.length;i++){
-            nums[i] = Integer.parseInt(fileInput[i]);
+            Scanner scanner = new Scanner(filename);
+            String[] fileInput = filename.list();
+            int[] nums = new int[fileInput.length];
+                for(int i = 0; i < fileInput.length;i++){
+                nums[i] = Integer.parseInt(fileInput[i]);
         }
 
         return nums;
@@ -81,7 +100,7 @@ public class lookingOutForNumberOne {
 
         try {
 
-            int[] nums = readMysteriousNumbers(file);
+            int[] nums = readMysteriousNumbers(readFile);
             int[] tally = nthDigitTally(b, nums);
             for(int i = 0; i < 10; i++){
                 System.out.println(i + "s:\t" + tally[i]);
