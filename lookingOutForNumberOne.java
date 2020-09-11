@@ -1,5 +1,7 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 /*
 Our world is controlled by mathematics – just ask any physicist.
@@ -23,16 +25,17 @@ However, we’ll break that problem down into easier steps.
 
 public class lookingOutForNumberOne {
 
+    public static int countDigits(int num) {
 
-    public static int countDigits(int num){
+        int count = 0;
+        for (; num != 0; num = num / 10, ++count) {
+        }
 
-        //int count = 0;
-       // for (; num != 0; num = num/10, ++count) {
-        //}
-
-        return(int) Math.floor(Math.log10(num)+1);
+        return (int) Math.floor(Math.log10(num) + 1);
     }//Part 1 - Goal: Count the number of digits in an integer
-    public static char nthDigitBack(int n, int num){
+
+    //Part 2 - Goal: Find the nth Digit from right to left
+    public static char nthDigitBack(int n, int num) {
 
         String z = num + "";
         char[] z1 = z.toCharArray();
@@ -40,31 +43,36 @@ public class lookingOutForNumberOne {
         return z1[length - n];
 
     }
-    //Part 2 - Goal: Find the nth Digit from right to left
+    //Part 3 - Goal: Find the nth Digit from left to right
 
-    public static int nthDigit(int n, int num){
-        int digit2 = 0;
-        while (num != 0){
+    public static int nthDigit(int n, int num) {
+        int count = countDigits(num);
+
+
+        //12345678 - 3RD digit: 4 1234.5678 % 10
+
+
+       /* int digit2 = 0;
+        while (num != 0) {
             int digit = num % 10;
-            digit2 =digit2 * 10 + digit;
+            digit2 = digit2 * 10 + digit;
             num /= 10;
-        }
+        }*/
 
         //String digit = num + "";
         //return digit.charAt(n);
         //first idea ^^
 
-        return(int) (digit2 / Math.pow(10,n) % 10);
+        //return(int) (digit2 / Math.pow(10,n) % 10);
+        return (int) (num / Math.pow(10,((count - n - 1) % 10)));
+
 
     }
-    //Part 3 - Goal: Find the nth Digit from left to right
 
-
-
-    public static void updateTally(int n, int num, int[] tally){
-        int index = nthDigit(n,num);
+    public static void updateTally(int n, int num, int[] tally) {
+        int index = nthDigit(n, num);
         int updateInt = 0;
-        for(int i = 0; i <= n; i++){
+        for (int i = 0; i <= n; i++) {
             updateInt += tally[i];
         }
         tally[index] = updateInt;
@@ -74,61 +82,68 @@ public class lookingOutForNumberOne {
     //The tally contains the tally for the number of nth digits seen so far.
     //It updates the tall to reflect the nth digit of num.
 
-    public static int[] nthDigitTally(int n, int[] nums){
+    public static int[] nthDigitTally(int n, int[] nums) {
         int[] tally = new int[10];
-        for(int i = 0; i < nums.length; i++){
+
+        for (int i = 0; i < nums.length; i++) {
             updateTally(n, i, tally);
         }
 
-      return tally;
+        return tally;
     } //Part 5 - Goal: Write a method that calls updateTally, and takes in 2 arguments:
     //and returns a tally of frequencies of 0-9 as the nth digit of all the numbers in nums
 
 
-    public static int[] readMysteriousNumbers(File filename) throws Exception {
+    public static int[] readMysteriousNumbers() throws Exception {
         File file = new File("livejournal.txt");
-            Scanner scanner = new Scanner(filename);
-            String[] fileInput = filename.list();
-            int[] nums = new int[fileInput.length];
-                for(int i = 0; i < fileInput.length;i++){
-                nums[i] = Integer.parseInt(fileInput[i]);
+        Scanner scanner = new Scanner(file);
+        List<Integer> nums = new ArrayList<Integer>();
+        while (scanner.hasNextInt()) {
+            nums.add(scanner.nextInt());
         }
-
-        return nums;
+        int[] ret = new int[nums.size()];
+        for(int i = 0;i < ret.length;i++) {
+            ret[i] = nums.get(i);
+        }
+        return ret;
     }//Part 6 - Goal: Write a method that reads whitespace separated integers from a file
     //and returns a list of numbers suitable as input to nthDigitTally
 
+    //}
 
+     public static void main (String[] args){
 
-    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        System.out.println("Please enter a single digit integer:");
         String a = input.nextLine();
         int b = Integer.parseInt(a);
+        System.out.println("Please enter a file name:");
         String file = input.nextLine();
         File readFile = new File(file);
 
-        try {
+            try {
 
-            int[] nums = readMysteriousNumbers(readFile);
-            int[] tally = nthDigitTally(b, nums);
-            for(int i = 0; i < 10; i++){
-                System.out.println(i + "s: \t" + tally[i]);
-            } //Finish - Write your main method to read a number n, from input
-            //You can let a user enter a file name of a dataset or you can automatically use one.
-            //The program should tally the nth digits of the number in the data set
-            //and print out a table
+                int[] nums = readMysteriousNumbers();
+                int[] tally = nthDigitTally(b, nums);
+                for (int i = 0; i < 10; i++) {
+                    System.out.println(i + "s: \t" + tally[i]);
+                } //Finish - Write your main method to read a number n, from input
+                //You can let a user enter a file name of a dataset or you can automatically use one.
+                //The program should tally the nth digits of the number in the data set
+                //and print out a table
 
-        //int count = countDigits(12345678);
-        //System.out.println(count);
-        //System.out.println(nthDigitBack(0, 123));
-        //System.out.println(nthDigit(0, 123));
+                //int count = countDigits(12345678);
+                //System.out.println(count);
+                //System.out.println(nthDigitBack(0, 123));
+                //System.out.println(nthDigit(0, 123));
 
-    }
-        catch (Exception e){
-            System.out.println("Oops. Something went wrong.");
-        }
+            } catch (Exception e) {
+                System.out.println("Oops. Something went wrong.");
+                e.printStackTrace();
+            }
 
-    }
+     }
+
 
 
 }
