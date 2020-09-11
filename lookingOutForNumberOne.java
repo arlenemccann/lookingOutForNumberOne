@@ -27,30 +27,30 @@ public class lookingOutForNumberOne {
 
     public static int countDigits(int num) {
 
-        int count = 0;
-        for (; num != 0; num = num / 10, ++count) {
-        }
+        //int count = 0;
+        //for (; num != 0; num = num / 10, ++count) {
+        //}
 
         return (int) Math.floor(Math.log10(num) + 1);
     }//Part 1 - Goal: Count the number of digits in an integer
 
     //Part 2 - Goal: Find the nth Digit from right to left
-    public static char nthDigitBack(int n, int num) {
+    /*public static char nthDigitBack(int n, int num) {
 
         String z = num + "";
         char[] z1 = z.toCharArray();
         int length = z1.length - 1;
         return z1[length - n];
 
-    }
+
+
+    }*/
     //Part 3 - Goal: Find the nth Digit from left to right
 
     public static int nthDigit(int n, int num) {
         int count = countDigits(num);
 
-
         //12345678 - 3RD digit: 4 1234.5678 % 10
-
 
        /* int digit2 = 0;
         while (num != 0) {
@@ -65,7 +65,6 @@ public class lookingOutForNumberOne {
 
         //return(int) (digit2 / Math.pow(10,n) % 10);
         return (int) (num / Math.pow(10,((count - n - 1) % 10)));
-
 
     }
 
@@ -86,7 +85,7 @@ public class lookingOutForNumberOne {
         int[] tally = new int[10];
 
         for (int i = 0; i < nums.length; i++) {
-            updateTally(n, i, tally);
+            updateTally(n, i, nums);
         }
 
         return tally;
@@ -95,9 +94,9 @@ public class lookingOutForNumberOne {
 
 
     public static int[] readMysteriousNumbers() throws Exception {
-        File file = new File("livejournal.txt");
+        File file = new File("WyomingPop.txt");
         Scanner scanner = new Scanner(file);
-        List<Integer> nums = new ArrayList<Integer>();
+        List<Integer> nums = new ArrayList<>();
         while (scanner.hasNextInt()) {
             nums.add(scanner.nextInt());
         }
@@ -112,14 +111,13 @@ public class lookingOutForNumberOne {
     //}
 
      public static void main (String[] args){
-
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter a single digit integer:");
         String a = input.nextLine();
         int b = Integer.parseInt(a);
         System.out.println("Please enter a file name:");
         String file = input.nextLine();
-        File readFile = new File(file);
+        //File readFile = new File(file);
 
             try {
 
