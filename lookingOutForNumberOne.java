@@ -70,11 +70,15 @@ public class lookingOutForNumberOne {
 
     public static void updateTally(int n, int num, int[] tally) {
         int index = nthDigit(n, num);
+        tally[index]++;
+        /*int index = nthDigit(n, num);
         int updateInt = 0;
         for (int i = 0; i <= n; i++) {
             updateInt += tally[i];
         }
         tally[index] = updateInt;
+
+         */
 
     } //Part 4 - Goal: Write a method that calls nthDigit, and takes in 3 arguments:
     //an int (n), an int (num), and an int[] tally. We assume that tall is an int[] of 10 integers.
@@ -85,7 +89,8 @@ public class lookingOutForNumberOne {
         int[] tally = new int[10];
 
         for (int i = 0; i < nums.length; i++) {
-            updateTally(n, i, nums);
+            int number = nums[i];
+            updateTally(n, number, tally);
         }
 
         return tally;
@@ -93,9 +98,30 @@ public class lookingOutForNumberOne {
     //and returns a tally of frequencies of 0-9 as the nth digit of all the numbers in nums
 
 
-    public static int[] readMysteriousNumbers() throws Exception {
-        File file = new File("WyomingPop.txt");
-        Scanner scanner = new Scanner(file);
+    public static int[] readMysteriousNumbers(String filename) throws Exception {
+        File file = new File(filename);
+        Scanner counter = new Scanner(file);
+        int numLines = 0;
+        while(counter.hasNextLine()){
+            counter.nextLine();
+            numLines++;
+        }
+        int[] arr = new int[numLines];
+
+
+
+        Scanner reader = new Scanner(file);
+        int index = 0;
+        while(reader.hasNextLine()){
+            arr[index] = Integer.parseInt(reader.nextLine());
+            index++;
+        }
+
+
+
+
+        return arr;
+        /*
         List<Integer> nums = new ArrayList<>();
         while (scanner.hasNextInt()) {
             nums.add(scanner.nextInt());
@@ -104,7 +130,7 @@ public class lookingOutForNumberOne {
         for(int i = 0;i < ret.length;i++) {
             ret[i] = nums.get(i);
         }
-        return ret;
+        return ret*/
     }//Part 6 - Goal: Write a method that reads whitespace separated integers from a file
     //and returns a list of numbers suitable as input to nthDigitTally
 
@@ -116,12 +142,12 @@ public class lookingOutForNumberOne {
         String a = input.nextLine();
         int b = Integer.parseInt(a);
         System.out.println("Please enter a file name:");
-        String file = input.nextLine();
+        String filename = input.nextLine();
         //File readFile = new File(file);
 
             try {
 
-                int[] nums = readMysteriousNumbers();
+                int[] nums = readMysteriousNumbers(filename);
                 int[] tally = nthDigitTally(b, nums);
                 for (int i = 0; i < 10; i++) {
                     System.out.println(i + "s: \t" + tally[i]);
