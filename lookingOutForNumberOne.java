@@ -52,19 +52,19 @@ public class lookingOutForNumberOne {
 
         //12345678 - 3RD digit: 4 1234.5678 % 10
 
-       /* int digit2 = 0;
+        int digit2 = 0;
         while (num != 0) {
             int digit = num % 10;
             digit2 = digit2 * 10 + digit;
             num /= 10;
-        }*/
+        }
 
         //String digit = num + "";
         //return digit.charAt(n);
         //first idea ^^
 
         //return(int) (digit2 / Math.pow(10,n) % 10);
-        return (int) (num / Math.pow(10,((count - n - 1) % 10)));
+        return (int) (digit2 / Math.pow(10, n) % 10);
 
     }
 
